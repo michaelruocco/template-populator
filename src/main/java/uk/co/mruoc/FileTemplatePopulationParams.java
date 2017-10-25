@@ -13,11 +13,13 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
     private final String templateContent;
     private final Properties properties;
     private final OutputStream outputStream;
+    private final String outputPath;
 
     public FileTemplatePopulationParams(FileTemplatePopulationParamsBuilder builder) {
         this.templateContent = builder.templateContent;
         this.properties = builder.properties;
         this.outputStream = builder.outputStream;
+        this.outputPath = builder.outputPath;
     }
 
     @Override
@@ -35,6 +37,10 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
         return outputStream;
     }
 
+    public String getOutputPath() {
+        return outputPath;
+    }
+
     public static class FileTemplatePopulationParamsBuilder {
 
         private final FileContentLoader contentLoader = new FileSystemFileContentLoader();
@@ -44,6 +50,7 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
         private String templateContent;
         private Properties properties;
         private OutputStream outputStream;
+        private String outputPath;
 
         public FileTemplatePopulationParamsBuilder setTemplatePath(String templatePath) {
             this.templateContent = contentLoader.loadContent(templatePath);
@@ -56,11 +63,12 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
         }
 
         public FileTemplatePopulationParamsBuilder setOutputPath(String outputPath) {
+            this.outputPath = outputPath;
             this.outputStream = fileOutputStreamBuilder.toOutputStream(outputPath);
             return this;
         }
 
-        public TemplatePopulationParams build() {
+        public FileTemplatePopulationParams build() {
             return new FileTemplatePopulationParams(this);
         }
 

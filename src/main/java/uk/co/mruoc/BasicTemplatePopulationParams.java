@@ -56,7 +56,7 @@ public class BasicTemplatePopulationParams implements TemplatePopulationParams {
             return this;
         }
 
-        public TemplatePopulationParams build() {
+        public BasicTemplatePopulationParams build() {
             return new BasicTemplatePopulationParams(this);
         }
 
