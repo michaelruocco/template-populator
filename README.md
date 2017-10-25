@@ -16,9 +16,11 @@ the structure depending on the environment it is intended to be used in.
 To use the library from a program you will need to add a dependency to your project. In gradle you would do this by
 adding the following to your build.gradle file:
 
+```
 dependencies {
-    compile 'com.github.michaelruocco:tepmlate-populator:1.0.0'
+    compile 'com.github.michaelruocco:tepmlate-populator:1.0.1'
 }
+```
 
 Once you have the dependency in you need to build your template population config, a simple
 example of this using files from the local file system is shown below:
