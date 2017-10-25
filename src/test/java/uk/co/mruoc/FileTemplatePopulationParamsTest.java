@@ -3,10 +3,7 @@ package uk.co.mruoc;
 import org.junit.Test;
 import uk.co.mruoc.FileTemplatePopulationParams.FileTemplatePopulationParamsBuilder;
 
-import java.util.Properties;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.co.mruoc.BasicTemplatePopulationParams.BasicTemplatePopulationParamsBuilder;
 
 public class FileTemplatePopulationParamsTest {
 
