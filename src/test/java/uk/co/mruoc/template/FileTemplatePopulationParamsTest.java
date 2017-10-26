@@ -1,7 +1,7 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import org.junit.Test;
-import uk.co.mruoc.FileTemplatePopulationParams.FileTemplatePopulationParamsBuilder;
+import uk.co.mruoc.template.FileTemplatePopulationParams.FileTemplatePopulationParamsBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

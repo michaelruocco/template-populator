@@ -1,11 +1,11 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import org.junit.Test;
 
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.co.mruoc.BasicTemplatePopulationParams.*;
+import static uk.co.mruoc.template.BasicTemplatePopulationParams.*;
 
 public class BasicTemplatePopulationParamsTest {
 

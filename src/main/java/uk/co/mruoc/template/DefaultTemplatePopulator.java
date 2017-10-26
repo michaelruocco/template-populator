@@ -1,4 +1,4 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import com.google.common.collect.Maps;
 import org.jtwig.JtwigModel;

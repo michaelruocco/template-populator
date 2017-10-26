@@ -1,8 +1,8 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import org.junit.Test;
-import uk.co.mruoc.BasicTemplatePopulationParams.BasicTemplatePopulationParamsBuilder;
-import uk.co.mruoc.FileTemplatePopulationParams.FileTemplatePopulationParamsBuilder;
+import uk.co.mruoc.template.BasicTemplatePopulationParams.BasicTemplatePopulationParamsBuilder;
+import uk.co.mruoc.template.FileTemplatePopulationParams.FileTemplatePopulationParamsBuilder;
 import uk.co.mruoc.properties.FileContentLoader;
 import uk.co.mruoc.properties.FileSystemFileContentLoader;
 

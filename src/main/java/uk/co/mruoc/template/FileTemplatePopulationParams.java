@@ -1,4 +1,4 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import uk.co.mruoc.properties.FileContentLoader;
 import uk.co.mruoc.properties.FileSystemFileContentLoader;

@@ -1,4 +1,4 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

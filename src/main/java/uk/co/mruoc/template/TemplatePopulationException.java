@@ -1,4 +1,4 @@
-package uk.co.mruoc;
+package uk.co.mruoc.template;
 
 public class TemplatePopulationException extends RuntimeException {
 
