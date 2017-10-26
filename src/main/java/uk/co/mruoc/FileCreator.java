@@ -14,6 +14,7 @@ public class FileCreator {
 
     public File createFile(Path path) {
         try {
+            createParentIfDoesNotExist(path);
             Path createdPath = Files.createFile(path);
             return createdPath.toFile();
         } catch (IOException e) {
@@ -21,17 +22,24 @@ public class FileCreator {
         }
     }
 
-    public File createDirectory(String path) {
-        return createDirectory(Paths.get(path));
+    public File createDirectories(String path) {
+        return createDirectories(Paths.get(path));
     }
 
-    public File createDirectory(Path path) {
+    public File createDirectories(Path path) {
         try {
-            Path createdPath = Files.createDirectory(path);
+            Path createdPath = Files.createDirectories(path);
             return createdPath.toFile();
         } catch (IOException e) {
             throw new TemplatePopulationException(e);
         }
+    }
+
+    private void createParentIfDoesNotExist(Path path) {
+        Path parent = path.getParent();
+        if (Files.exists(parent))
+            return;
+        createDirectories(path.getParent());
     }
 
 }

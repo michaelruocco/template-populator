@@ -45,12 +45,25 @@ public class FileOutputStreamConverterTest {
     @Test(expected = TemplatePopulationException.class)
     public void shouldErrorIfFileExistsAsDirectory() {
         String filePath = "test/create.txt";
-        fileCreator.createDirectory(filePath);
+        fileCreator.createDirectories(filePath);
 
         try {
             converter.toOutputStream(filePath);
         } finally {
             fileDeleter.deleteFileIfExists(filePath);
+        }
+    }
+
+    @Test
+    public void shouldCreateParentDirectoryIfDoesNotExist() {
+        String filePath = "test/test-parent/create.txt";
+
+        converter.toOutputStream(filePath);
+
+        try {
+            assertThat(Files.exists(Paths.get(filePath))).isTrue();
+        } finally {
+            fileDeleter.deleteParentIfExists(filePath);
         }
     }
 
