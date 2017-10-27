@@ -1,12 +1,13 @@
 package uk.co.mruoc.template;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 
 public class FileOutputStreamConverterTest {
@@ -16,14 +17,15 @@ public class FileOutputStreamConverterTest {
     private final FileOutputStreamConverter converter = new FileOutputStreamConverter();
 
     @Test
-    public void shouldCreateFileIfDoesNotExist() {
+    public void shouldCreateFileIfDoesNotExist() throws IOException {
         String filePath = "test/create.txt";
 
-        converter.toOutputStream(filePath);
+        OutputStream stream = converter.toOutputStream(filePath);
 
         try {
             assertThat(Files.exists(Paths.get(filePath))).isTrue();
         } finally {
+            stream.close();
             fileDeleter.deleteFileIfExists(filePath);
         }
     }
@@ -33,11 +35,12 @@ public class FileOutputStreamConverterTest {
         String filePath = "test/create.txt";
         fileCreator.createFile(filePath);
 
-        converter.toOutputStream(filePath);
+        OutputStream stream = converter.toOutputStream(filePath);
 
         try {
             assertThat(Files.exists(Paths.get(filePath))).isTrue();
         } finally {
+            stream.close();
             fileDeleter.deleteFileIfExists(filePath);
         }
     }
@@ -55,14 +58,15 @@ public class FileOutputStreamConverterTest {
     }
 
     @Test
-    public void shouldCreateParentDirectoryIfDoesNotExist() {
+    public void shouldCreateParentDirectoryIfDoesNotExist() throws IOException {
         String filePath = "test/test-parent/create.txt";
 
-        converter.toOutputStream(filePath);
+        OutputStream stream = converter.toOutputStream(filePath);
 
         try {
             assertThat(Files.exists(Paths.get(filePath))).isTrue();
         } finally {
+            stream.close();
             fileDeleter.deleteParentIfExists(filePath);
         }
     }
