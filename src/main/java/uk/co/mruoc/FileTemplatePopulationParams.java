@@ -1,14 +1,16 @@
 package uk.co.mruoc;
 
+import java.io.OutputStream;
+import java.util.Properties;
+
 import uk.co.mruoc.properties.FileContentLoader;
 import uk.co.mruoc.properties.FileSystemFileContentLoader;
 import uk.co.mruoc.properties.FileSystemPropertyLoader;
 import uk.co.mruoc.properties.PropertyLoader;
 
-import java.io.OutputStream;
-import java.util.Properties;
-
 public class FileTemplatePopulationParams implements TemplatePopulationParams {
+
+    private final FileOutputStreamConverter fileOutputStreamBuilder = new FileOutputStreamConverter();
 
     private final String templateContent;
     private final Properties properties;
@@ -18,7 +20,7 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
     public FileTemplatePopulationParams(FileTemplatePopulationParamsBuilder builder) {
         this.templateContent = builder.templateContent;
         this.properties = builder.properties;
-        this.outputStream = builder.outputStream;
+        this.outputStream = fileOutputStreamBuilder.toOutputStream(builder.outputPath);
         this.outputPath = builder.outputPath;
     }
 
@@ -45,11 +47,9 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
 
         private final FileContentLoader contentLoader = new FileSystemFileContentLoader();
         private final PropertyLoader propertyLoader = new FileSystemPropertyLoader();
-        private final FileOutputStreamConverter fileOutputStreamBuilder = new FileOutputStreamConverter();
 
         private String templateContent;
         private Properties properties;
-        private OutputStream outputStream;
         private String outputPath;
 
         public FileTemplatePopulationParamsBuilder setTemplatePath(String templatePath) {
@@ -64,7 +64,6 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
 
         public FileTemplatePopulationParamsBuilder setOutputPath(String outputPath) {
             this.outputPath = outputPath;
-            this.outputStream = fileOutputStreamBuilder.toOutputStream(outputPath);
             return this;
         }
 
