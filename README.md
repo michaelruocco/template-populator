@@ -18,7 +18,7 @@ adding the following to your build.gradle file:
 
 ```
 dependencies {
-    compile 'com.github.michaelruocco:tepmlate-populator:2.0.0'
+    compile 'com.github.michaelruocco:tepmlate-populator:2.0.1'
 }
 ```
 
