@@ -45,12 +45,22 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
 
     public static class FileTemplatePopulationParamsBuilder {
 
-        private final FileContentLoader contentLoader = new FileSystemFileContentLoader();
-        private final PropertyLoader propertyLoader = new FileSystemPropertyLoader();
+        private final FileContentLoader contentLoader;
+        private final PropertyLoader propertyLoader;
 
         private String templateContent;
         private Properties properties;
         private String outputPath;
+
+        public FileTemplatePopulationParamsBuilder() {
+            this(new FileSystemFileContentLoader(), new FileSystemPropertyLoader());
+        }
+
+        public FileTemplatePopulationParamsBuilder(FileContentLoader contentLoader, PropertyLoader propertyLoader) {
+            this.contentLoader = contentLoader;
+            this.propertyLoader = propertyLoader;
+        }
+
 
         public FileTemplatePopulationParamsBuilder setTemplatePath(String templatePath) {
             this.templateContent = contentLoader.loadContent(templatePath);
