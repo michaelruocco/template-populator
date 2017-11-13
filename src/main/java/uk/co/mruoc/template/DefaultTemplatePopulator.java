@@ -17,6 +17,8 @@ public class DefaultTemplatePopulator implements TemplatePopulator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTemplatePopulator.class);
 
+    private final FileOutputStreamConverter fileOutputStreamConverter = new FileOutputStreamConverter();
+
     @Override
     public void populate(TemplatePopulationParams params) {
         try {
@@ -27,7 +29,7 @@ public class DefaultTemplatePopulator implements TemplatePopulator {
     }
 
     private void doPopulate(TemplatePopulationParams params) throws IOException {
-        OutputStream outputStream = params.getOutputStream();
+        OutputStream outputStream = fileOutputStreamConverter.toOutputStream(params.getOutputPath());
         try {
             LOGGER.info("creating template with content " + params.getTemplateContent());
             JtwigTemplate template = JtwigTemplate.inlineTemplate(params.getTemplateContent());

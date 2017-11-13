@@ -1,18 +1,17 @@
 package uk.co.mruoc.template;
 
-import java.io.OutputStream;
 import java.util.Properties;
 
 public class BasicTemplatePopulationParams implements TemplatePopulationParams {
 
     private final String templateContent;
     private final Properties properties;
-    private final OutputStream outputStream;
+    private final String outputPath;
 
     public BasicTemplatePopulationParams(BasicTemplatePopulationParamsBuilder builder) {
         this.templateContent = builder.templateContent;
         this.properties = builder.properties;
-        this.outputStream = builder.outputStream;
+        this.outputPath = builder.outputPath;
     }
 
     @Override
@@ -26,15 +25,15 @@ public class BasicTemplatePopulationParams implements TemplatePopulationParams {
     }
 
     @Override
-    public OutputStream getOutputStream() {
-        return outputStream;
+    public String getOutputPath() {
+        return outputPath;
     }
 
     public static class BasicTemplatePopulationParamsBuilder {
 
         private String templateContent;
         private Properties properties = new Properties();
-        private OutputStream outputStream;
+        private String outputPath;
 
         public BasicTemplatePopulationParamsBuilder setTemplateContent(String templateContent) {
             this.templateContent = templateContent;
@@ -51,8 +50,8 @@ public class BasicTemplatePopulationParams implements TemplatePopulationParams {
             return this;
         }
 
-        public BasicTemplatePopulationParamsBuilder setOutputStream(OutputStream outputStream) {
-            this.outputStream = outputStream;
+        public BasicTemplatePopulationParamsBuilder setOutputPath(String outputPath) {
+            this.outputPath = outputPath;
             return this;
         }
 

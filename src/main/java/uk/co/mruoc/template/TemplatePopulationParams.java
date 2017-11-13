@@ -1,6 +1,5 @@
 package uk.co.mruoc.template;
 
-import java.io.OutputStream;
 import java.util.Properties;
 
 public interface TemplatePopulationParams {
@@ -9,6 +8,6 @@ public interface TemplatePopulationParams {
 
     Properties getProperties();
 
-    OutputStream getOutputStream();
+    String getOutputPath();
 
 }

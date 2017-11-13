@@ -1,6 +1,5 @@
 package uk.co.mruoc.template;
 
-import java.io.OutputStream;
 import java.util.Properties;
 
 import uk.co.mruoc.properties.FileContentLoader;
@@ -10,17 +9,13 @@ import uk.co.mruoc.properties.PropertyLoader;
 
 public class FileTemplatePopulationParams implements TemplatePopulationParams {
 
-    private final FileOutputStreamConverter fileOutputStreamBuilder = new FileOutputStreamConverter();
-
     private final String templateContent;
     private final Properties properties;
-    private final OutputStream outputStream;
     private final String outputPath;
 
     public FileTemplatePopulationParams(FileTemplatePopulationParamsBuilder builder) {
         this.templateContent = builder.templateContent;
         this.properties = builder.properties;
-        this.outputStream = fileOutputStreamBuilder.toOutputStream(builder.outputPath);
         this.outputPath = builder.outputPath;
     }
 
@@ -35,10 +30,6 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
     }
 
     @Override
-    public OutputStream getOutputStream() {
-        return outputStream;
-    }
-
     public String getOutputPath() {
         return outputPath;
     }

@@ -18,18 +18,23 @@ public class DefaultTemplatePopulatorTest {
 
     @Test
     public void shouldPopulateTemplateUsingBasicParams() throws UnsupportedEncodingException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        TemplatePopulationParams params = new BasicTemplatePopulationParamsBuilder()
-                .setTemplateContent("my {{var1}} {{var2}}")
-                .setProperty("var1", "test")
-                .setProperty("var2", "template")
-                .setOutputStream(outputStream)
-                .build();
+        String outputPath = "test/output.txt";
+        fileDeleter.deleteFileIfExists(outputPath);
+        try {
+            TemplatePopulationParams params = new BasicTemplatePopulationParamsBuilder()
+                    .setTemplateContent("my {{var1}} {{var2}}")
+                    .setProperty("var1", "test")
+                    .setProperty("var2", "template")
+                    .setOutputPath(outputPath)
+                    .build();
 
-        populator.populate(params);
+            populator.populate(params);
 
-        String result = outputStream.toString("UTF8");
-        assertThat(result).isEqualTo("my test template");
+            String result = contentLoader.loadContent(outputPath);
+            assertThat(result).isEqualTo("my test template");
+        } finally {
+            fileDeleter.deleteFileIfExists(outputPath);
+        }
     }
 
     @Test
