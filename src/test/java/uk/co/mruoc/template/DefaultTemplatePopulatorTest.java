@@ -39,21 +39,19 @@ public class DefaultTemplatePopulatorTest {
 
     @Test
     public void shouldPopulateTemplateUsingFileParams() throws UnsupportedEncodingException {
-        String outputPath = "test/output.txt";
-        fileDeleter.deleteFileIfExists(outputPath);
+        FileTemplatePopulationPaths paths = new FakeFileTemplatePopulationPaths();
+        fileDeleter.deleteFileIfExists(paths.getOutputPath());
         try {
             TemplatePopulationParams params = new FileTemplatePopulationParamsBuilder()
-                    .setTemplatePath("test/template.txt")
-                    .setPropertiesPath("test/properties.properties")
-                    .setOutputPath(outputPath)
+                    .setPaths(paths)
                     .build();
 
             populator.populate(params);
 
-            String result = contentLoader.loadContent(outputPath);
+            String result = contentLoader.loadContent(paths.getOutputPath());
             assertThat(result).isEqualTo("my file testing templates");
         } finally {
-            fileDeleter.deleteFileIfExists(outputPath);
+            fileDeleter.deleteFileIfExists(paths.getOutputPath());
         }
     }
 

@@ -68,6 +68,13 @@ public class FileTemplatePopulationParams implements TemplatePopulationParams {
             return this;
         }
 
+        public FileTemplatePopulationParamsBuilder setPaths(FileTemplatePopulationPaths paths) {
+            setTemplatePath(paths.getTemplatePath());
+            setPropertiesPath(paths.getPropertiesPath());
+            setOutputPath(paths.getOutputPath());
+            return this;
+        }
+
         public FileTemplatePopulationParams build() {
             return new FileTemplatePopulationParams(this);
         }
