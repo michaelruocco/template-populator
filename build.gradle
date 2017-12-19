@@ -1,7 +1,7 @@
 plugins {
     id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.8.1'
-    id 'com.github.ben-manes.versions' version '0.15.0'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'com.github.ben-manes.versions' version '0.17.0'
 }
 
 apply plugin: 'java'
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compile 'org.jtwig:jtwig-core:5.86.1.RELEASE'
-    compile 'com.github.michaelruocco:property-loader:2.0.1'
+    compile 'com.github.michaelruocco:property-loader:3.0.2'
     compile 'com.google.guava:guava-collections:r03'
     compile 'org.slf4j:slf4j-api:1.7.25'
 
@@ -50,14 +50,10 @@ artifacts {
     archives javadocJar
 }
 
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask(uploadArchives)) {
-        signing {
-            required true
-            sign configurations.archives
-        }
-    }
+signing {
+    sign configurations.archives
 }
+signArchives.enabled = gradle.startParameter.taskNames.contains("uploadArchives")
 
 uploadArchives {
     repositories {
