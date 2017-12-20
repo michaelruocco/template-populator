@@ -55,4 +55,25 @@ public class DefaultTemplatePopulatorTest {
         }
     }
 
+    @Test
+    public void shouldCreateParentFolderWhenPopulatingTemplate() throws UnsupportedEncodingException {
+        String outputPath = "test/folder/output.txt";
+        fileDeleter.deleteParentIfExists(outputPath);
+        try {
+            TemplatePopulationParams params = new BasicTemplatePopulationParamsBuilder()
+                    .setTemplateContent("my {{var1}} {{var2}}")
+                    .setProperty("var1", "test")
+                    .setProperty("var2", "template")
+                    .setOutputPath(outputPath)
+                    .build();
+
+            populator.populate(params);
+
+            String result = contentLoader.loadContent(outputPath);
+            assertThat(result).isEqualTo("my test template");
+        } finally {
+            fileDeleter.deleteParentIfExists(outputPath);
+        }
+    }
+
 }

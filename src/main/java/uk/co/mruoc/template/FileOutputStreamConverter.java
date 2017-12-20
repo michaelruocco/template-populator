@@ -1,5 +1,8 @@
 package uk.co.mruoc.template;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +12,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileOutputStreamConverter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileOutputStreamConverter.class);
 
     private final FileCreator fileCreator = new FileCreator();
 
@@ -23,7 +28,10 @@ public class FileOutputStreamConverter {
 
     private File createFileIfDoesNotExist(String stringPath) {
         Path path = Paths.get(stringPath);
-        if (Files.exists(path) && Files.isRegularFile(path))
+        boolean exists = Files.exists(path);
+        boolean regularFile = Files.isRegularFile(path);
+        LOGGER.info("file " + path.toAbsolutePath() + " exists " + exists + " regular file " + regularFile);
+        if (exists && regularFile)
             return path.toFile();
         return fileCreator.createFile(path);
     }
