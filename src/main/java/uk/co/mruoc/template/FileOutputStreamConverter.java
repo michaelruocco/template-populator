@@ -26,13 +26,10 @@ public class FileOutputStreamConverter {
         }
     }
 
-    private File createFileIfDoesNotExist(String stringPath) {
-        Path path = Paths.get(stringPath);
-        boolean exists = Files.exists(path);
-        boolean regularFile = Files.isRegularFile(path);
-        LOGGER.info("file " + path.toAbsolutePath() + " exists " + exists + " regular file " + regularFile);
-        if (exists && regularFile)
-            return path.toFile();
+    private File createFileIfDoesNotExist(String path) {
+        File file = new File(path);
+        if (file.exists())
+            return file;
         return fileCreator.createFile(path);
     }
 
